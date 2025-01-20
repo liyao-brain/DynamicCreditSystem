@@ -12,12 +12,12 @@ contract DynamicCreditSystem is ERC20 {
 
     mapping(address => User) public users; // 用户地址映射到其信息
     uint256 public constant INITIAL_CREDIT_SCORE = 100; // 初始信用评分
-    uint256 public constant BASE_COLLATERAL_FACTOR = 150; // 初始超额抵押率 150%
-    uint256 public constant MIN_COLLATERAL_FACTOR = 110; // 最低超额抵押率 110%
-    uint256 public constant SCORE_STEP = 10; // 每 10 分信用评分减少超额抵押率
+    uint256 public constant BASE_COLLATERAL_FACTOR = 60; // 初始抵押率 60%
+    uint256 public constant MAX_COLLATERAL_FACTOR = 95; // 最高抵押率 95%
+    uint256 public constant SCORE_STEP = 10; // 每 10 分信用评分增加抵押率
     uint256 public constant COLLATERAL_STEP_REDUCTION = 5; // 每步抵押率减少 5%
     uint256 public constant EXCHANGE_RATE = 10000; // 1 ETH = 10000 测试代币
-
+    
     event UserRegistered(address indexed user, uint256 creditScore);
     event CollateralDeposited(address indexed user, uint256 ethAmount, uint256 tokenAmount);
     event LoanRepaid(address indexed user, uint256 tokenAmount, uint256 ethReturned, uint256 newCreditScore);
@@ -59,7 +59,7 @@ contract DynamicCreditSystem is ERC20 {
 
         // 根据信用评分动态计算抵押率
         uint256 collateralFactor = calculateCollateralFactor(user.creditScore);
-        uint256 loanAmount = (msg.value * 100) / collateralFactor; // 计算贷款金额（ETH）
+        uint256 loanAmount = (msg.value * collateralFactor) / 100; // 计算贷款金额（ETH）
         user.loanBalance += loanAmount;
 
         // 计算发放的测试代币数量
@@ -92,7 +92,7 @@ contract DynamicCreditSystem is ERC20 {
         uint256 collateralFactor = calculateCollateralFactor(user.creditScore);
 
         // 计算应返还的 ETH，不能超过用户实际抵押的金额
-        repaymentAmount = repaymentAmount * collateralFactor / 100;
+        repaymentAmount = repaymentAmount * 100 / collateralFactor;
         uint256 ethReturned = repaymentAmount > user.totalCollateral
             ? user.totalCollateral
             : repaymentAmount;
@@ -114,15 +114,14 @@ contract DynamicCreditSystem is ERC20 {
         emit LoanRepaid(msg.sender, tokenAmount, ethReturned, user.creditScore);
     }
 
-
     /**
      * @dev 动态计算抵押率
      */
     function calculateCollateralFactor(uint256 creditScore) public pure returns (uint256) {
         uint256 reductionSteps = (creditScore - INITIAL_CREDIT_SCORE) / SCORE_STEP;
         uint256 reduction = reductionSteps * COLLATERAL_STEP_REDUCTION;
-        uint256 factor = BASE_COLLATERAL_FACTOR - reduction;
-        if (factor < MIN_COLLATERAL_FACTOR) return MIN_COLLATERAL_FACTOR;
+        uint256 factor = BASE_COLLATERAL_FACTOR + reduction;
+        if (factor > MAX_COLLATERAL_FACTOR) return MAX_COLLATERAL_FACTOR;
         else return factor;
     }
 

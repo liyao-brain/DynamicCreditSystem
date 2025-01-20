@@ -275,7 +275,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "MIN_COLLATERAL_FACTOR",
+				"name": "MAX_COLLATERAL_FACTOR",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -752,11 +752,11 @@
 			]
 		},
 		"contracts/DynamicCreditSystem.sol": {
-			"keccak256": "0xb9b8a34dc461b1de949ec7db82469765e0bc5aa9cf2dc6c99ebf88c85ed97aba",
+			"keccak256": "0x3986f57619dbdf8baabf7a218f36ce7e6730b7fccf4153514a51ef304fed7d7b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b3d1884cc49d117ead93743496a89cccee2d87c83b4180abe402c78893407426",
-				"dweb:/ipfs/QmRSB9Y6fcWBFavPCCL3VefCDmoNodkhnD9G5q8aYrR7U5"
+				"bzz-raw://ee60df5170e69ae6e9534a28778988a0da982aaa5819996dca1050b669886f2a",
+				"dweb:/ipfs/QmeMJnwuF1tdb5v8A9r2EZ9EKzmWxs42u7MXkz6gn8kPfi"
 			]
 		}
 	},
