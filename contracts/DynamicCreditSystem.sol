@@ -13,7 +13,7 @@ contract DynamicCreditSystem is ERC20 {
     mapping(address => User) public users; // 用户地址映射到其信息
     uint256 public constant INITIAL_CREDIT_SCORE = 100; // 初始信用评分
     uint256 public constant BASE_COLLATERAL_FACTOR = 60; // 初始抵押率 60%
-    uint256 public constant MAX_COLLATERAL_FACTOR = 95; // 最高抵押率 95%
+    uint256 public constant MAX_COLLATERAL_FACTOR = 105; // 最高抵押率 105%
     uint256 public constant SCORE_STEP = 10; // 每 10 分信用评分增加抵押率
     uint256 public constant COLLATERAL_STEP_REDUCTION = 5; // 每步抵押率减少 5%
     uint256 public constant EXCHANGE_RATE = 10000; // 1 ETH = 10000 测试代币

@@ -752,11 +752,11 @@
 			]
 		},
 		"contracts/DynamicCreditSystem.sol": {
-			"keccak256": "0x3986f57619dbdf8baabf7a218f36ce7e6730b7fccf4153514a51ef304fed7d7b",
+			"keccak256": "0x7e4f1daa2ad90c192d38b897a607b422f5d6d1f3af77cee643271914d7a65e19",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ee60df5170e69ae6e9534a28778988a0da982aaa5819996dca1050b669886f2a",
-				"dweb:/ipfs/QmeMJnwuF1tdb5v8A9r2EZ9EKzmWxs42u7MXkz6gn8kPfi"
+				"bzz-raw://7e9748ed27454ce0bff97a2e52300d776a8b089e0bc40d7c1cd27baaeeb5f799",
+				"dweb:/ipfs/QmZj5Xa2zh6AVwDpqxoZbz8F68QuAvssBYS8x3XpMabN1f"
 			]
 		}
 	},
